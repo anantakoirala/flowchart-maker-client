@@ -1,7 +1,12 @@
 "use client";
+import { restApi } from "@/api";
+import { handleApiError } from "@/lib/handleApiError";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 type Props = {};
@@ -18,6 +23,7 @@ const loginFormSchema = z
   });
 
 const Page = (props: Props) => {
+  const route = useRouter();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -32,13 +38,17 @@ const Page = (props: Props) => {
     handleSubmit,
   } = form;
 
-  const onSubmit = (data: z.infer<typeof loginFormSchema>) => {
-    console.log("data", data);
-  };
+  const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {
+    try {
+      const response = await restApi.post("/api/v1/auth/register", data);
+      toast.success(response?.data?.message);
+      route.push("/login");
 
-  useEffect(() => {
-    console.log("errors", errors);
-  }, [errors]);
+      console.log("data", data);
+    } catch (error) {
+      handleApiError(error);
+    }
+  };
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center h-[90vh] px-4">

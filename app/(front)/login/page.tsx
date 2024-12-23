@@ -1,4 +1,6 @@
 "use client";
+import { restApi } from "@/api";
+import { handleApiError } from "@/lib/handleApiError";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -26,7 +28,13 @@ const Page = (props: Props) => {
     handleSubmit,
   } = form;
 
-  const onSubmit = (data: z.infer<typeof loginFormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {
+    try {
+      const response = await restApi.post("/api/v1/auth/login", data);
+      console.log("response", response);
+    } catch (error) {
+      handleApiError(error);
+    }
     console.log("data", data);
   };
 
