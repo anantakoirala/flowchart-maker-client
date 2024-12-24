@@ -2,6 +2,7 @@
 import { restApi } from "@/api";
 import { handleApiError } from "@/lib/handleApiError";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,6 +15,7 @@ const loginFormSchema = z.object({
 });
 
 const Page = (props: Props) => {
+  const route = useRouter();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -32,6 +34,7 @@ const Page = (props: Props) => {
     try {
       const response = await restApi.post("/api/v1/auth/login", data);
       console.log("response", response);
+      route.push("/dashboard");
     } catch (error) {
       handleApiError(error);
     }
