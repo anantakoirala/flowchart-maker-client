@@ -1,6 +1,8 @@
 "use client";
 import AuthProvider from "@/ContextProvider/AuthProvider";
+import { store } from "@/redux/store";
 import React from "react";
+import { Provider } from "react-redux";
 
 type Props = {
   children: React.ReactNode;
@@ -8,9 +10,11 @@ type Props = {
 
 const layout = ({ children }: Props) => {
   return (
-    <AuthProvider>
-      <div>{children}</div>
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <div>{children}</div>
+      </AuthProvider>
+    </Provider>
   );
 };
 

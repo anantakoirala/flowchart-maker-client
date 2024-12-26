@@ -33,8 +33,17 @@ const Page = (props: Props) => {
   const onSubmit = async (data: z.infer<typeof loginFormSchema>) => {
     try {
       const response = await restApi.post("/api/v1/auth/login", data);
-      console.log("response", response);
-      route.push("/dashboard");
+      // Fetch the user's teams
+      const teamResponse = await restApi.get("/api/v1/team/my-teams");
+      console.log("teamResponse", teamResponse);
+      // Check if the user has at least one team
+      if (teamResponse.data?.myTeams?.length > 0) {
+        // Redirect to the dashboard
+        route.push("/dashboard");
+      } else {
+        // Redirect to the team creation page
+        route.push("/teams/create");
+      }
     } catch (error) {
       handleApiError(error);
     }
