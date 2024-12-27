@@ -54,7 +54,7 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({}),
-  tagTypes: ["teams"],
+  tagTypes: ["teams", "files"],
 });
 
 export const {} = api;

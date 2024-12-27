@@ -3,11 +3,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { api } from "./api/api";
 import { teamSlice } from "./team/teamSlice";
+import { fileSlice } from "./file/flieSlice";
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     [teamSlice.name]: teamSlice.reducer,
+    [fileSlice.name]: fileSlice.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>

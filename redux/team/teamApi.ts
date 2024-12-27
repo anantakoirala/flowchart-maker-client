@@ -21,7 +21,7 @@ export const teamApi = api.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log("result tags", result.data.myTeams);
+
           //console.log("myWorkspaces", result.data.myWorkspaces);
           //console.log("result", result);
           dispatch(setTeams(result.data.myTeams));
