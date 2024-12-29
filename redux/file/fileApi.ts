@@ -8,6 +8,7 @@ export const fileApi = api.injectEndpoints({
         method: "POST",
         body: data, // Send the data object directly
       }),
+      invalidatesTags: ["files"],
     }),
     getTeamFiles: builder.query({
       query: (teamId) => ({
@@ -15,6 +16,7 @@ export const fileApi = api.injectEndpoints({
         method: "GET",
         credentials: "include" as const,
       }),
+      providesTags: ["files"],
     }),
   }),
 });

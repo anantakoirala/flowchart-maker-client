@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveTeam } from "@/redux/team/teamSlice";
 import { RootState } from "@/redux/store";
 import { useLazyGetTeamFilesQuery } from "@/redux/file/fileApi";
-import { setProgressCount } from "@/redux/file/flieSlice";
+import { setFiles, setProgressCount } from "@/redux/file/flieSlice";
 
 type Props = {};
 
@@ -90,8 +90,10 @@ const SidebarTopSection = (props: Props) => {
   // Set progress count after fetching team files
   useEffect(() => {
     if (isSuccess && teamFilesData?.totalNumberOfFiles !== undefined) {
+      console.log("teamFilesData", teamFilesData.files);
       // Dispatch the action with the total number of files from the response
       dispatch(setProgressCount(teamFilesData.totalNumberOfFiles));
+      dispatch(setFiles(teamFilesData.files));
     }
   }, [isSuccess, teamFilesData, dispatch]);
 

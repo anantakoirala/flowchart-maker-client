@@ -28,7 +28,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(true);
       try {
         const response = await restApi.get("/api/v1/auth/me");
-
+        console.log("response", response);
         const userData: AuthContextValue = {
           name: response.data.user.username,
           email: response.data.user.email,
@@ -37,7 +37,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         };
         setAuthenticatedUser(userData);
       } catch (error: any) {
-        console.log("error response", error.response);
         if (
           error?.response?.status === 401 &&
           error.response.data?.message !== "Unauthorized - Invalid token"

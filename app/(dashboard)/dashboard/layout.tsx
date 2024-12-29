@@ -10,10 +10,10 @@ const layout = ({ children }: Props) => {
     <div>
       <div className="grid grid-cols-4">
         {/* sidebar */}
-        <div className="">
+        <div className="h-screen w-72 fixed">
           <SideBar />
         </div>
-        <div className="grid-cols-3">{children}</div>
+        <div className="col-span-4 ml-72">{children}</div>
       </div>
     </div>
   );
