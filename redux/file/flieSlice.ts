@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 type initialState = {
   progressCount: number;
   files: File[];
+  document: string;
 };
 
 const initialState: initialState = {
   progressCount: 0,
   files: [],
+  document: "",
 };
 
 export const fileSlice = createSlice({
@@ -21,8 +23,11 @@ export const fileSlice = createSlice({
     setFiles: (state, action) => {
       state.files = action.payload;
     },
+    setDocument: (state, action) => {
+      state.document = action.payload;
+    },
   },
 });
 
-export const { setProgressCount, setFiles } = fileSlice.actions;
+export const { setProgressCount, setFiles, setDocument } = fileSlice.actions;
 export default fileSlice.reducer;

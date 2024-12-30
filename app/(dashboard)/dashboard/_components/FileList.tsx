@@ -13,11 +13,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const FileList = (props: Props) => {
+  const route = useRouter();
   const { files } = useSelector((state: RootState) => state.file);
+  const moveToWorkspace = (id: string) => {
+    route.push(`/workspace/${id}`);
+  };
   return (
     <div className="mt-10">
       <div className="overflow-x-auto">
@@ -41,7 +46,11 @@ const FileList = (props: Props) => {
 
           <tbody className="divide-y divide-gray-200">
             {files.map((file: File) => (
-              <tr key={file._id}>
+              <tr
+                key={file._id}
+                onClick={() => moveToWorkspace(file._id)}
+                className="cursor-pointer hover:bg-gray-100"
+              >
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                   {file.title}
                 </td>
@@ -64,7 +73,10 @@ const FileList = (props: Props) => {
                       <MoreHorizontal />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem className="gap-3">
+                      <DropdownMenuItem
+                        className="gap-3"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <Archive className="h-4 w-4" /> Archive
                       </DropdownMenuItem>
                     </DropdownMenuContent>
