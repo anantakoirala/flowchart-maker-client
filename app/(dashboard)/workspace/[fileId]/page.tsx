@@ -8,6 +8,10 @@ const DocumentEditor = dynamic(() => import("../_components/DocumentEditor"), {
   ssr: false,
 });
 
+const Canvas = dynamic(() => import("../_components/Canvas"), {
+  ssr: false,
+});
+
 type Props = {};
 
 const Page = (props: Props) => {
@@ -16,11 +20,13 @@ const Page = (props: Props) => {
       <WorkspaceHeader />
       {/* workspace layout */}
 
-      <div className="flex md:flex-row flex-col">
-        <div className="h-[calc(100vh-200px)] md:h-screen w-full bg-green-300">
+      <div className="flex md:flex-row flex-col w-full">
+        <div className="h-[calc(100vh-200px)] md:h-screen w-full ">
           <DocumentEditor />
         </div>
-        <div className="h-[calc(100vh-200px)] md:h-screen w-full bg-blue-300"></div>
+        <div className="h-[calc(100vh-200px)] md:h-screen w-full  border-l">
+          <Canvas />
+        </div>
       </div>
     </div>
   );

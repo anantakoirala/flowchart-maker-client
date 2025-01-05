@@ -117,8 +117,8 @@ const DocumentEditor = (props: Props) => {
   }, [gettingFileDataSuccess]);
 
   return (
-    <div className="h-full p-4">
-      <div className="overflow-y-auto h-full border-2" id="editorjs"></div>
+    <div className="h-full ">
+      <div className="overflow-y-auto h-full w-full pl-14" id="editorjs"></div>
     </div>
   );
 };

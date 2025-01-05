@@ -8,6 +8,12 @@
 .ce-toolbar__plus {
   @apply bg-slate-300;
 }
+.image-tool__caption {
+  @apply border-none shadow-none;
+}
+.excalidraw .sidebar-trigger {
+  display: none !important;
+}
 
 h1.ce-header {
   @apply text-3xl font-bold;
